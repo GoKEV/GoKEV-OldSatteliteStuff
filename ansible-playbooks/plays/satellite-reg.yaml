@@ -1,0 +1,14 @@
+- yum: name=http://satellite.labtop/pub/katello-ca-consumer-latest.noarch.rpm
+
+- redhat_subscription: state=present activationkey="RHEL7KS" org_id="0465a0f7-ca4c-49f7-8a39-bacf1e33c5d2" autosubscribe=true
+  when: ansible_os_family == "Redhat" and ansible_distribution_major_version == "7"
+
+- redhat_subscription: state=present activationkey="RHEL6KS" org_id="0465a0f7-ca4c-49f7-8a39-bacf1e33c5d2" autosubscribe=true
+  when: ansible_os_family == "Redhat" and ansible_distribution_major_version == "6"
+
+
+
+
+
+
+

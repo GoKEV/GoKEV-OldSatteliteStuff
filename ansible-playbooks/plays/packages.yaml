@@ -1,0 +1,9 @@
+vars:
+  install_packages:
+  - libselinux-python
+  - nmap
+  - nano
+  - ntp
+  - screen
+  - sysstat
+

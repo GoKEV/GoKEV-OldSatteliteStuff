@@ -1,0 +1,15 @@
+- name: install packages with yum
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ install_packages }}"
+
+- name: nanorc template
+  template: src=includes/nanorc dest=/etc/nanorc owner=root group=wheel mode=0644 backup=yes
+
+- name: copy json nanorc template
+  copy: src=includes/json.nanorc dest=/usr/share/nano/json.nanorc owner=root group=wheel mode=0644 backup=yes
+
+- name: copy yaml nanorc template
+  copy: src=includes/yaml.nanorc dest=/usr/share/nano/yaml.nanorc owner=root group=wheel mode=0644 backup=yes
+

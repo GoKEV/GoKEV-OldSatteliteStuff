@@ -1,0 +1,32 @@
+- template: src=includes/screenrc dest=/root/.screenrc owner=root group=root mode=0644 backup=yes
+- template: src=includes/screenrc dest=/etc/skel/.screenrc owner=root group=root mode=0644
+
+- name: group sudo creation
+  group: name=sudo state=present gid=123
+- name: group svcacct creation
+  group: name=svcacct state=present gid=124
+
+- name: user root
+  user: name=root password='$5$UJVcZzAe$4i6jlDxECSe9t8L5Kt/ZFhPPinuiyOjeW8kjVGKPrED' generate_ssh_key=yes
+
+- name: screenrc template for existing user
+  template: src=includes/screenrc dest=/root/.screenrc owner=root group=root mode=0644 backup=yes
+
+- name: build a path for .ssh
+  file: path=/root/.ssh/ state=directory owner=root group=wheel mode=700
+
+- name: authorized_keys file for root
+  copy: src=includes/authorized_keys dest=/root/.ssh/authorized_keys owner=root group=wheel mode=600 backup=yes
+
+- name: sshd_config file 
+  copy: src=includes/sshd_config dest=/etc/ssh/sshd_config owner=root group=wheel mode=600 backup=yes
+
+- name: sudoers file 
+  copy: src=includes/lab.sudoers dest=/etc/sudoers.d/lab.sudoers owner=root group=wheel mode=440 backup=yes
+
+- name: user serviceaccount
+  user: name=serviceaccount password='$6$PCiwYvBD$dDO2FLvtQ8PbHF7miqYUGlxEJBAMdU/qqrgN05X7gZbu1/uNciG4RhOVHWAEC6lSAxMzxR6htb8yu12cUrJ8r0' uid=501 group=svcacct groups=nobody,sudo append=yes home=/home/serviceaccount move_home=yes createhome=yes
+
+- name: screenrc template for existing user
+  template: src=includes/screenrc dest=/home/serviceaccount/.screenrc owner=serviceaccount group=svcacct mode=0644
+
