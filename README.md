@@ -13,7 +13,7 @@ This is a set of stuff to go along with a Red Hat Satellite Server 6.x implement
 
 There's no easy way to give instructions how to use these unless you've already implemented Ansible Tower and Red Hat Satellite Server 6.x.  Assuming that's the case, here are the components to consider:
 
-* [Ansible Tower Job] - Link this to the git repository for Lab-Playbooks.  This is configured in Ansible Tower under "jobs"
+* [Ansible Tower Playbooks] - Link this to the git repository for Lab-Playbooks.  This is configured in Ansible Tower under "projects", then added into "job templates"
 * [Ansible Tower Provisioning Callback] - Set up your job template with a callback URL.  Replace the one in these kickstarts to match.  This is configured in Ansible Tower under "job templates"
 * [pxeboot.cfg] - drop the 'default' file in there and make sure your paths to images and kickstarts match what's being offered from your Satellite Server.  This 'default' file includes the menu that allows you to pick a type of build.  Some people will reduce the wait time on this and have it set to automatically pick their favorite method (and even clear out options they don't want).  Tear it up!  Have fun!!
 * [kickstarts] - This is the file that will end up on your server in /root/anaconda-ks.cfg once the first boot is complate.  The included KS is a fairly standard "thin" KS that includes some of my publickeys, along with a snippet at the end which calls the Ansible Tower Provisioning Callback URL.
