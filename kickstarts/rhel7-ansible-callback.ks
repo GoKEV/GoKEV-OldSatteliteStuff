@@ -131,7 +131,19 @@ sync
 
 # Inform the build system that we are done.
 
-cat << EOF > /usr/lib/systemd/system/ansible-firstboot.service 
+
+cat << EOF > /usr/lib/systemd/system/ansible-firstboot.json
+{
+  "host_config_key": "KEV" ,
+  "extra_vars": {
+    "rebootrequired": "yes"
+  }
+}
+
+EOF
+
+
+cat << EOF > /usr/lib/systemd/system/ansible-firstboot.service
 [Unit]
 Description=Provisioning callback to Ansible
 Wants=network-online.target
@@ -139,15 +151,20 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/curl -k -f -H 'Content-Type: application/json' -XPOST -d '{"host_config_key": "b7fa3c86f88acbb32b9ec920d811aac3", "extra_vars": "{\"rebootrequired\": \"yes\"}"}' https://ansibletower:443/api/v1/job_templates/16/callback/
-#ExecStartPost=/usr/bin/systemctl disable ansible-firstboot
+
+
+ExecStart=/usr/bin/curl -kfH 'Content-Type: application/json' -XPOST -d @/usr/lib/systemd/system/ansible-firstboot.json https://ansibletower:443/api/v1/job_templates/35/callback/
+ExecStartPost=/usr/bin/systemctl disable ansible-firstboot
 
 [Install]
 WantedBy=multi-user.target
 
 EOF
 
+
 systemctl enable ansible-firstboot.service
+
+
 
 ) 2>&1 | tee /root/install.post.log
 
