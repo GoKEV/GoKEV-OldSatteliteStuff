@@ -142,7 +142,7 @@ After=network-online.target
 [Service]
 Type=oneshot
 
-ExecStart=/usr/bin/curl -k -f -H 'Content-Type: application/json' -XPOST -d '{"host_config_key": "5a8ec154832b780b9bdef1061764ae5a", "extra_vars": "{\"rebootrequired\": \"yes\"}"}' https://ansibletower:443/api/v1/job_templates/35/callback/
+ExecStart=/usr/bin/curl -k -f -H 'Content-Type: application/json' -XPOST -d '{"host_config_key": "39a6f713df69aa2949339423571e4b2b", "extra_vars": "{\"rebootrequired\": \"yes\"}"}' https://ansibletower:443/api/v1/job_templates/35/callback/
 #ExecStartPost=/usr/bin/systemctl disable ansible-firstboot
 
 [Install]
