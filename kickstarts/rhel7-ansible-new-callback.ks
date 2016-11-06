@@ -29,6 +29,8 @@ screen
 nano
 perl
 rsync
+deltarpm
+
 @Core
 %end
 
