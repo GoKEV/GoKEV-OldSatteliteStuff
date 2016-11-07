@@ -36,7 +36,7 @@
 
 ## If we called for a reboot
     - name: reboot host
-      command:  /sbin/shutdown -r now ; echo
+      command:  /sbin/shutdown -r +1 ; echo
 
 ## this reboot only works with systemd (not RHEL5 or RHEL6)
 #    - name: reboot host
@@ -46,7 +46,7 @@
 #      when: rebootrequired is defined and rebootrequired == 'yes'
 
     - name: wait for host sshd
-      local_action: wait_for host="{{ inventory_hostname }}" search_regex=OpenSSH port=22 timeout=300 delay=30
+      local_action: wait_for host="{{ inventory_hostname }}" search_regex=OpenSSH port=22 timeout=300 delay=90
       when: rebootrequired is defined and rebootrequired == 'yes'
 
 
