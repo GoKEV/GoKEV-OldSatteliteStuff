@@ -25,7 +25,6 @@
 ## If we called for a reboot
     - name: reboot host RHEL6 if we call for a reboot
       command: sleep 5 ; /sbin/shutdown -r ; echo &
-      when: ansible_os_family == "Redhat" and ansible_distribution_major_version == "6"
       when: rebootrequired is defined and rebootrequired == 'yes' and ansible_os_family == "Redhat" and ansible_distribution_major_version == "6"
 
 
