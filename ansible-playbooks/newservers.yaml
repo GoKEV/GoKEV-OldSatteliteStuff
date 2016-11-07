@@ -36,7 +36,7 @@
 
 ## If we called for a reboot
     - name: reboot host
-      command:  /sbin/shutdown -r 
+      command:  /sbin/shutdown -r now ; echo
 
 ## this reboot only works with systemd (not RHEL5 or RHEL6)
 #    - name: reboot host
