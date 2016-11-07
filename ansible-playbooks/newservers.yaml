@@ -21,21 +21,29 @@
 
     - include: plays/satellite-reg.yaml
 
+
+
 ## If this is a RHEL6 machine
-    - name: Remove the service the kickstart laid down for RHEL6
-      file: path=/etc/rc.d/rc3.d/S99ansible-firstboot state=absent
-      ignore_errors: yes
+#    - name: Remove the service the kickstart laid down for RHEL6
+#      file: path=/etc/rc.d/rc3.d/S99ansible-firstboot state=absent
+#      ignore_errors: yes
 
 ## If this is a RHEL7 machine
-    - name: Remove the service the kickstart laid down for RHEL7
-      file: path=/usr/lib/systemd/system/ansible-firstboot.service state=absent
-      ignore_errors: yes
+#    - name: Remove the service the kickstart laid down for RHEL7
+#      file: path=/usr/lib/systemd/system/ansible-firstboot.service state=absent
+#      ignore_errors: yes
 
+
+## If we called for a reboot
     - name: reboot host
-      command: /usr/bin/systemd-run --on-active=10 /usr/bin/systemctl reboot
-      async: 0
-      poll: 0
-      when: rebootrequired is defined and rebootrequired == 'yes'
+      command:  /sbin/shutdown -r +1 ; echo
+
+## this reboot only works with systemd (not RHEL5 or RHEL6)
+#    - name: reboot host
+#      command: /usr/bin/systemd-run --on-active=10 /usr/bin/systemctl reboot
+#      async: 0
+#      poll: 0
+#      when: rebootrequired is defined and rebootrequired == 'yes'
 
     - name: wait for host sshd
       local_action: wait_for host="{{ inventory_hostname }}" search_regex=OpenSSH port=22 timeout=300 delay=30
