@@ -40,5 +40,9 @@
       local_action: wait_for host="{{ inventory_hostname }}" search_regex=OpenSSH port=22 timeout=300 delay=90
       when: rebootrequired is defined and rebootrequired == 'yes' and ansible_os_family == "Redhat" 
 
+    - name: Display conditionals for this request
+      debug: rebootrequired == "{{ rebootrequired }}" and ansible_os_family == "{{ ansible_os_family }}" and ansible_distribution_major_version == "{{ ansible_distribution_major_version }}"
 
+    - name: Display all variables/facts known for a host
+      debug: var=hostvars[inventory_hostname] verbosity=4
 
