@@ -15,7 +15,13 @@ bootloader --location=mbr --append="nofb quiet splash=quiet"
 
 zerombr
 clearpart --all --initlabel
-autopart
+part  /boot     --asprimary  --size=500
+part  / --asprimary --size=1024  --grow
+part  swap --size=1024  --maxsize=2048 --grow
+
+#zerombr
+#clearpart --all --initlabel
+#autopart
 
 text
 reboot
@@ -29,6 +35,7 @@ screen
 nano
 perl
 rsync
+yum-utils
 @Core
 %end
 
