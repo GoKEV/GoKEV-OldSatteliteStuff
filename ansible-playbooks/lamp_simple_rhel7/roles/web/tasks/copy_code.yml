@@ -6,4 +6,4 @@
   git: repo={{ repository }} dest=/var/www/html/
 
 - name: Creates the index.php file
-  template: src=includes/index.php.j2 dest=/var/www/html/index.php
+  template: src=index.php.j2 dest=/var/www/html/index.php
