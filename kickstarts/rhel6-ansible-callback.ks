@@ -1,5 +1,5 @@
 install
-url --url http://satellite.labtop/pulp/repos/0465a0f7-ca4c-49f7-8a39-bacf1e33c5d2/Library/content/dist/rhel/server/6/6.8/x86_64/kickstart/
+url --url http://satellite.lab/pulp/repos/0465a0f7-ca4c-49f7-8a39-bacf1e33c5d2/Library/content/dist/rhel/server/6/6.8/x86_64/kickstart/
 lang en_US.UTF-8
 selinux --disabled
 keyboard us
@@ -43,7 +43,7 @@ cp -va /etc/resolv.conf /mnt/sysimage/etc/resolv.conf
 %end
 
 %post
-logger "Starting anaconda rhel6ks.labtop postinstall"
+logger "Starting anaconda rhel6ks.lab postinstall"
 exec < /dev/tty3 > /dev/tty3
 #changing to VT 3 so that we can see whats going on....
 /usr/bin/chvt 3
@@ -76,7 +76,7 @@ echo "updating system time"
   # add subscription manager
  
   yum -t -y -e 0 install subscription-manager
-  rpm -ivh http://satellite.labtop/pub/katello-ca-consumer-latest.noarch.rpm
+  rpm -ivh http://satellite.lab/pub/katello-ca-consumer-latest.noarch.rpm
   rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
 
   echo "Registering the System"
