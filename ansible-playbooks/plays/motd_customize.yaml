@@ -1,6 +1,0 @@
-- name: motd
-  template: src=includes/motd dest=/etc/motd owner=root group=root mode=0644
-
-- name: issue
-  template: src=includes/issue dest=/etc/issue owner=root group=root mode=0644
-

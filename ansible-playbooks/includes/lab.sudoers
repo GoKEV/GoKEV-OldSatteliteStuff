@@ -1,4 +1,0 @@
-## Allows people in group wheel to run all commands
-%svcacct  ALL=(ALL)       ALL
-%wheel    ALL=(ALL)       NOPASSWD: ALL
-
