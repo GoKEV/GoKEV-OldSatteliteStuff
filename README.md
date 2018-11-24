@@ -1,6 +1,6 @@
 # Satellite Server Kickstart Files
 
-[![N|Solid](http://gokev.com/GoKEVicon300.png)](https://goKev.com)
+[![N|Solid](http://gokev.com/GoKEV200.png)](https://goKev.com)
 
 This is a set of stuff to go along with a Red Hat Satellite Server 6.x implementation
   - PXE boot config menu
